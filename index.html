@@ -1,0 +1,1983 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asem Vision | Integrated Marketing & Events - GCC</title>
+    <meta name="description" content="Premium marketing, events & brand activation across the GCC. Creating impactful campaigns since 2012.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@300;400&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --black-primary: #050505;
+            --black-secondary: #0a0810;
+            --black-tertiary: #07050d;
+            --gold-primary: #d6a14f;
+            --gold-light: #f3c98b;
+            --gold-dark: #b8860b;
+            --purple-accent: #6d2dff;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.4);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: var(--black-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+            body.rtl {
+                font-family: 'Tajawal', sans-serif;
+                direction: rtl;
+            }
+
+        /* Noise Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Scroll Light Ring - Hidden on mobile for performance */
+        .scroll-light-ring {
+            position: fixed;
+            width: 56px;
+            height: 56px;
+            z-index: 100;
+            pointer-events: none;
+            transition: transform 0.3s var(--transition-smooth);
+        }
+
+        @media (max-width: 768px) {
+            .scroll-light-ring {
+                display: none !important;
+            }
+        }
+
+        .scroll-light-ring-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .scroll-ring-outer {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 2px solid rgba(243, 201, 139, 0.75);
+            box-shadow: 0 0 18px rgba(255, 190, 100, 0.35), 0 0 36px rgba(255, 120, 40, 0.15);
+            background: radial-gradient(circle, rgba(243, 201, 139, 0.2) 0%, transparent 70%);
+        }
+
+        .scroll-ring-inner {
+            position: absolute;
+            inset: 7px;
+            border-radius: 50%;
+            border: 1px solid rgba(170, 150, 255, 0.5);
+            box-shadow: 0 0 12px rgba(170, 150, 255, 0.18);
+        }
+
+        .scroll-ring-center {
+            position: absolute;
+            inset: 31%;
+            border-radius: 50%;
+            background: rgba(255, 210, 90, 0.7);
+            filter: blur(4px);
+            box-shadow: 0 0 14px rgba(255, 210, 90, 0.45);
+        }
+
+        .scroll-ring-particles {
+            position: absolute;
+            inset: 0;
+            animation: rotate 6s linear infinite;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+        }
+
+            .particle:nth-child(1) {
+                left: 50%;
+                top: 0;
+                width: 6px;
+                height: 6px;
+                transform: translate(-50%, -50%);
+                background: #fbbf24;
+                box-shadow: 0 0 8px rgba(255, 140, 60, 0.7);
+            }
+
+            .particle:nth-child(2) {
+                right: 4px;
+                top: 50%;
+                width: 4px;
+                height: 4px;
+                transform: translateY(-50%);
+                background: #fef3c7;
+                box-shadow: 0 0 6px rgba(255, 220, 160, 0.6);
+            }
+
+            .particle:nth-child(3) {
+                left: 4px;
+                bottom: 8px;
+                width: 4px;
+                height: 4px;
+                background: #fca5a5;
+                box-shadow: 0 0 6px rgba(255, 110, 70, 0.6);
+            }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(10px, -8px) rotate(8deg);
+            }
+
+            50% {
+                transform: translate(-8px, 6px) rotate(-6deg);
+            }
+
+            75% {
+                transform: translate(12px, -10px) rotate(10deg);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Typography */
+        .text-gold {
+            color: var(--gold-primary);
+        }
+
+        .text-gold-light {
+            color: var(--gold-light);
+        }
+
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .rtl .font-mono {
+            font-family: 'Tajawal', monospace;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        .text-5xl {
+            font-size: 3rem;
+        }
+
+        .text-6xl {
+            font-size: 3.75rem;
+        }
+
+        .text-7xl {
+            font-size: 4.5rem;
+        }
+
+        .text-8xl {
+            font-size: 6rem;
+        }
+
+        @media (min-width: 768px) {
+            .md\:text-6xl {
+                font-size: 3.75rem;
+            }
+
+            .md\:text-7xl {
+                font-size: 4.5rem;
+            }
+
+            .md\:text-8xl {
+                font-size: 6rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .lg\:text-7xl {
+                font-size: 4.5rem;
+            }
+
+            .lg\:text-8xl {
+                font-size: 6rem;
+            }
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .glass-strong {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 2.5rem;
+            border: 1px solid rgba(214, 161, 79, 0.4);
+            border-radius: 9999px;
+            font-size: 0.625rem;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold-primary);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.5s var(--transition-smooth);
+            text-decoration: none;
+        }
+
+            .btn-primary:hover {
+                background: var(--gold-primary);
+                color: var(--black-primary);
+                transform: translateY(-2px);
+                box-shadow: 0 10px 40px rgba(214, 161, 79, 0.3);
+            }
+
+        .btn-gold {
+            display: inline-block;
+            padding: 1.25rem 3rem;
+            border: 2px solid var(--gold-primary);
+            border-radius: 9999px;
+            font-size: 0.6875rem;
+            font-weight: 700;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--gold-primary);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.7s var(--transition-smooth);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .btn-gold::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: var(--gold-primary);
+                transform: scaleX(0);
+                transform-origin: right;
+                transition: transform 0.5s var(--transition-smooth);
+                z-index: -1;
+            }
+
+            .btn-gold:hover::before {
+                transform: scaleX(1);
+                transform-origin: left;
+            }
+
+            .btn-gold:hover {
+                color: var(--black-primary);
+                box-shadow: 0 0 50px rgba(214, 161, 79, 0.4);
+            }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            padding: 1.5rem 0;
+            transition: all 0.7s var(--transition-smooth);
+        }
+
+            .navbar.scrolled {
+                padding: 1rem 0;
+                background: rgba(5, 5, 5, 0.8);
+                backdrop-filter: blur(20px);
+                border-bottom: 1px solid rgba(214, 161, 79, 0.1);
+            }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Mobile nav fix */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        .nav-logo {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+        }
+
+        .nav-logo-main {
+            font-size: 1.125rem;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gold-primary);
+            line-height: 1;
+        }
+
+        .nav-logo-sub {
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--text-tertiary);
+            margin-top: 0.25rem;
+            font-weight: 300;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+            .nav-link:hover {
+                color: var(--gold-primary);
+                opacity: 1;
+            }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(5, 5, 5, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 40;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s var(--transition-smooth);
+        }
+
+            .mobile-menu.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+        .mobile-link {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+            .mobile-link:hover {
+                color: var(--gold-primary);
+            }
+
+        /* Sections */
+        section {
+            position: relative;
+            padding: 8rem 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 6rem;
+            border-bottom: 1px solid rgba(214, 161, 79, 0.1);
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+            .hero-bg img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                opacity: 0.4;
+                filter: grayscale(100%) contrast(1.25);
+            }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(5, 5, 5, 0.9) 0%, rgba(5, 5, 5, 0.6) 50%, rgba(5, 5, 5, 0.3) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+        }
+
+        .hero-tagline {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5em;
+            color: var(--gold-primary);
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .rtl .hero-tagline {
+            font-family: 'Tajawal', monospace;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            line-height: 0.9;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+            .hero-title span {
+                font-style: italic;
+                color: var(--gold-light);
+                position: relative;
+                display: inline-block;
+            }
+
+                .hero-title span::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -0.5rem;
+                    left: 0;
+                    width: 100%;
+                    height: 2px;
+                    background: linear-gradient(90deg, var(--gold-primary), transparent);
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    animation: underlineReveal 1.2s var(--transition-smooth) 0.8s forwards;
+                }
+
+        @keyframes underlineReveal {
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.8;
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--gold-primary);
+            opacity: 0.4;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(10px);
+            }
+        }
+
+        /* About Section */
+        .about {
+            background: var(--black-secondary);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .about::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(circle at 30% 20%, rgba(217, 119, 6, 0.18) 0%, transparent 35%), radial-gradient(circle at 70% 70%, rgba(124, 58, 237, 0.14) 0%, transparent 40%);
+                pointer-events: none;
+            }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (min-width: 1024px) {
+            .about-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .about-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-tagline {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            color: var(--gold-primary);
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+
+        .rtl .section-tagline {
+            font-family: 'Tajawal', monospace;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+
+            .section-title span {
+                font-style: italic;
+                color: var(--gold-light);
+            }
+
+        .about-text {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.8;
+            max-width: 600px;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.5625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: rgba(214, 161, 79, 0.7);
+            margin-top: 0.5rem;
+            display: block;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+        }
+
+        .about-image {
+            aspect-ratio: 4/5;
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(214, 161, 79, 0.25);
+            position: relative;
+        }
+
+            .about-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                filter: grayscale(20%) brightness(0.8);
+            }
+
+        .about-quote {
+            position: absolute;
+            bottom: -2rem;
+            right: -2rem;
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(214, 161, 79, 0.2);
+            padding: 2rem;
+            border-radius: 1rem;
+            max-width: 300px;
+            display: none;
+        }
+
+        @media (min-width: 1200px) {
+            .about-quote {
+                display: block;
+            }
+        }
+
+        .about-quote-icon {
+            color: rgba(214, 161, 79, 0.2);
+            margin-bottom: 1rem;
+        }
+
+        .about-quote-text {
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .about-quote-author {
+            font-size: 0.5625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gold-primary);
+        }
+
+        /* Mission Section */
+        .mission {
+            background: var(--black-primary);
+            text-align: center;
+        }
+
+        .mission-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .mission-text {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.8;
+            margin-top: 2rem;
+        }
+
+        /* Services Section */
+        .services {
+            background: var(--black-tertiary);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .services::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(circle at 20% 80%, rgba(217, 119, 6, 0.12) 0%, transparent 30%), radial-gradient(circle at 85% 15%, rgba(124, 58, 237, 0.16) 0%, transparent 35%);
+                pointer-events: none;
+            }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        @media (min-width: 768px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            transition: all 0.5s var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .service-card::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(135deg, rgba(214, 161, 79, 0.1) 0%, transparent 50%);
+                opacity: 0;
+                transition: opacity 0.5s;
+            }
+
+            .service-card:hover {
+                background: rgba(255, 255, 255, 0.06);
+                border-color: rgba(214, 161, 79, 0.2);
+                transform: translateY(-5px);
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            }
+
+                .service-card:hover::before {
+                    opacity: 1;
+                }
+
+        .service-icon {
+            color: var(--gold-primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .service-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .service-desc {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+            font-weight: 300;
+            line-height: 1.7;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Expertise Section */
+        .expertise {
+            background: var(--black-primary);
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (min-width: 1024px) {
+            .expertise-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .expertise-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .expertise-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s var(--transition-smooth);
+        }
+
+        .rtl .expertise-item {
+            transform: translateX(30px);
+        }
+
+        .expertise-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .expertise-icon {
+            color: var(--gold-primary);
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+        }
+
+        .expertise-text {
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .expertise-visual {
+            aspect-ratio: 1;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(214, 161, 79, 0.2);
+            background: linear-gradient(135deg, rgba(214, 161, 79, 0.1) 0%, rgba(109, 45, 255, 0.1) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+            /* Critical mobile video fix */
+            .expertise-visual video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 1.5rem;
+                display: block;
+            }
+
+        /* Reach Section */
+        .reach {
+            background: var(--black-secondary);
+            text-align: center;
+        }
+
+        .reach-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .reach-flags {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .flag {
+            font-size: 3rem;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.5s var(--transition-smooth);
+        }
+
+            .flag.visible {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+        /* Clients Section */
+        .clients {
+            background: var(--black-primary);
+        }
+
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        @media (min-width: 768px) {
+            .clients-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .clients-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        .client-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: all 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+            .client-card.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .client-card:hover {
+                border-color: rgba(214, 161, 79, 0.3);
+                background: rgba(255, 255, 255, 0.05);
+            }
+
+        .client-name {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Campaigns & Digital Section */
+        .campaigns-digital {
+            background: var(--black-tertiary);
+        }
+
+        .campaigns-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .campaigns-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .campaign-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .campaign-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-secondary);
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.5s var(--transition-smooth);
+        }
+
+        .rtl .campaign-item {
+            transform: translateX(20px);
+        }
+
+        .campaign-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .campaign-icon {
+            color: var(--gold-primary);
+            flex-shrink: 0;
+        }
+
+        .digital-social {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-icon {
+            color: rgba(214, 161, 79, 0.6);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+            .social-icon:hover {
+                color: var(--gold-primary);
+                transform: translateY(-3px);
+            }
+
+        /* Contact Section */
+        .contact {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(214, 161, 79, 0.1);
+        }
+
+        .contact-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+            .contact-bg img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                opacity: 0.3;
+            }
+
+        .contact-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 40%, rgba(217, 119, 6, 0.12) 0%, transparent 30%), radial-gradient(circle at 50% 75%, rgba(124, 58, 237, 0.10) 0%, transparent 35%);
+        }
+
+        .contact-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+
+        .contact-title {
+            font-size: clamp(3rem, 10vw, 8rem);
+            line-height: 0.85;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+            .contact-title span {
+                font-style: normal;
+                color: var(--gold-primary);
+                display: block;
+            }
+
+        .contact-text {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            margin-bottom: 3rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+            .contact-item a {
+                color: inherit;
+                text-decoration: none;
+                transition: color 0.3s;
+            }
+
+                .contact-item a:hover {
+                    color: var(--gold-primary);
+                }
+
+        /* Footer */
+        .footer {
+            background: var(--black-primary);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 4rem 0;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+            }
+        }
+
+        .footer-logo {
+            font-size: 1.125rem;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gold-primary);
+        }
+
+        .footer-tagline {
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--text-tertiary);
+            margin-top: 0.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-link {
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--text-tertiary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+            .footer-link:hover {
+                color: var(--gold-primary);
+            }
+
+        .footer-copyright {
+            font-size: 0.625rem;
+            letter-spacing: 0.4em;
+            color: rgba(255, 255, 255, 0.2);
+            text-transform: uppercase;
+        }
+
+        /* Floating Buttons */
+        .floating-buttons {
+            position: fixed;
+            z-index: 90;
+        }
+
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 56px;
+            height: 56px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s;
+            z-index: 95;
+            cursor: pointer;
+            border: none;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .floating-whatsapp {
+                width: 64px;
+                height: 64px;
+                bottom: 1.25rem;
+                right: 1.25rem;
+            }
+        }
+
+        .rtl .floating-whatsapp {
+            right: auto;
+            left: 1.5rem;
+        }
+
+        .floating-whatsapp:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 50px rgba(37, 211, 102, 0.4);
+        }
+
+        .floating-email {
+            position: fixed;
+            bottom: 1.5rem;
+            right: calc(1.5rem + 70px);
+            width: 64px;
+            height: 64px;
+            background: var(--gold-primary);
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(214, 161, 79, 0.3);
+            transition: all 0.3s;
+            z-index: 100;
+            cursor: pointer;
+            border: none;
+            color: var(--black-primary);
+        }
+
+        @media (min-width: 768px) {
+            .floating-email {
+                display: flex;
+            }
+        }
+
+        .rtl .floating-email {
+            right: auto;
+            left: calc(1.5rem + 70px);
+        }
+
+        .floating-email:hover {
+            transform: scale(1.1);
+        }
+
+        /* Utility Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s var(--transition-smooth);
+        }
+
+            .reveal.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        /* ==================== RESPONSIVE FIXES ==================== */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            section {
+                padding: 4rem 0; /* More compact on mobile */
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            /* Very small screens (iPhone SE, etc.) */
+            .hero-title {
+                font-size: clamp(2.2rem, 8vw, 3.5rem);
+            }
+
+            .contact-title {
+                font-size: clamp(2.5rem, 9vw, 5rem);
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--black-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold-dark);
+            border-radius: 5px;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: var(--gold-primary);
+            }
+    </style>
+</head>
+<body>
+
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Scroll Light Ring (hidden on mobile) -->
+    <div class="scroll-light-ring" id="scrollLightRing">
+        <div class="scroll-light-ring-inner">
+            <div class="scroll-ring-outer"></div>
+            <div class="scroll-ring-inner"></div>
+            <div class="scroll-ring-center"></div>
+            <div class="scroll-ring-particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <span class="nav-logo-main">Asem Vision</span>
+                <span class="nav-logo-sub" data-en="Integrated Marketing" data-ar="وكالة تسويق متكاملة">Integrated Marketing</span>
+            </a>
+
+            <div class="nav-menu">
+                <a href="#home" class="nav-link" data-en="Home" data-ar="الرئيسية">Home</a>
+                <a href="#about" class="nav-link" data-en="About" data-ar="من نحن">About</a>
+                <a href="#services" class="nav-link" data-en="Services" data-ar="خدماتنا">Services</a>
+                <a href="#expertise" class="nav-link" data-en="Expertise" data-ar="خبراتنا">Expertise</a>
+                <a href="#clients" class="nav-link" data-en="Clients" data-ar="عملاؤنا">Clients</a>
+                <a href="#campaigns" class="nav-link" data-en="Campaigns" data-ar="حملاتنا">Campaigns</a>
+                <a href="#contact" class="nav-link" data-en="Contact" data-ar="تواصل معنا">Contact</a>
+                <button class="btn-primary" onclick="toggleLanguage()" id="langToggle">
+                    🇸🇦 العربية
+                </button>
+                <a href="https://wa.me/971505822373" target="_blank" class="btn-primary" data-en="Get a Quote" data-ar="احصل على عرض">
+                    Get a Quote
+                </a>
+            </div>
+
+            <button class="nav-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home" class="mobile-link" onclick="toggleMobileMenu()" data-en="Home" data-ar="الرئيسية">Home</a>
+        <a href="#about" class="mobile-link" onclick="toggleMobileMenu()" data-en="About" data-ar="من نحن">About</a>
+        <a href="#services" class="mobile-link" onclick="toggleMobileMenu()" data-en="Services" data-ar="خدماتنا">Services</a>
+        <a href="#expertise" class="mobile-link" onclick="toggleMobileMenu()" data-en="Expertise" data-ar="خبراتنا">Expertise</a>
+        <a href="#clients" class="mobile-link" onclick="toggleMobileMenu()" data-en="Clients" data-ar="عملاؤنا">Clients</a>
+        <a href="#campaigns" class="mobile-link" onclick="toggleMobileMenu()" data-en="Campaigns" data-ar="حملاتنا">Campaigns</a>
+        <a href="#contact" class="mobile-link" onclick="toggleMobileMenu()" data-en="Contact" data-ar="تواصل معنا">Contact</a>
+        <button class="btn-primary" onclick="toggleLanguage(); toggleMobileMenu();" id="mobileLangToggle">
+            🇸🇦 Switch to Arabic
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <img src="https://elements-resized.envatousercontent.com/elements-video-cover-images/1207aa49-0d42-43fd-b867-bfe27e9f2a12/video_preview/video_preview_0000.jpg?w=1920&cf_fit=cover&q=85&format=auto" alt="Luxury Gold Geometric Background">
+        </div>
+        <div class="hero-overlay"></div>
+
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-tagline" data-en="Integrated Marketing, Events & Brand Activation Across the GCC" data-ar="حلول تسويق متكاملة وتنظيم فعاليات في دول الخليج">
+                    Integrated Marketing, Events & Brand Activation Across the GCC
+                </span>
+
+                <h1 class="hero-title">
+                    <span data-en="We Create Impactful" data-ar="نصمم تجارب">We Create Impactful</span><br>
+                    <span data-en="Brand Experiences." data-ar="علامات تجارية مؤثرة.">Brand Experiences.</span>
+                </h1>
+
+                <p class="hero-subtitle" data-en="We connect brands with their audiences through creativity, strategy, and flawless execution across the Gulf region." data-ar="نربط العلامات التجارية بجمهورها من خلال الإبداع والاستراتيجية والتنفيذ الاحترافي عبر منطقة الخليج.">
+                    We connect brands with their audiences through creativity, strategy, and flawless execution across the Gulf region.
+                </p>
+
+                <div class="hero-cta">
+                    <a href="#services" class="btn-primary">
+                        <span data-en="Explore Services" data-ar="استكشف خدماتنا">Explore Services</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                    <a href="#contact" class="btn-primary" data-en="Start Your Project" data-ar="ابدأ مشروعك">Start Your Project</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-scroll">
+            <i data-lucide="chevron-down" class="w-8 h-8"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content reveal">
+                    <span class="section-tagline" data-en="About Us" data-ar="من نحن">About Us</span>
+                    <h2 class="section-title">
+                        <span data-en="Excellence Since" data-ar="تميز منذ">Excellence Since</span><br>
+                        <span data-en="2012." data-ar="2012.">2012.</span>
+                    </h2>
+                    <p class="about-text" data-en="Asem Vision is a marketing, advertising, and event management company. We provide integrated solutions across field marketing, digital campaigns, and event execution. With extensive experience and a highly trained team, we deliver campaigns that combine creativity with cultural understanding." data-ar="عاصم فيجن شركة متخصصة في التسويق والإعلان وتنظيم الفعاليات. نقدم حلولاً متكاملة تشمل الحملات الميدانية، التسويق الرقمي، وتنفيذ الفعاليات. نمتلك فريقاً محترفاً وخبرة واسعة تتيح لنا تقديم حملات تجمع بين الإبداع وفهم السوق.">
+                        Asem Vision is a marketing, advertising, and event management company. We provide integrated solutions across field marketing, digital campaigns, and event execution. With extensive experience and a highly trained team, we deliver campaigns that combine creativity with cultural understanding.
+                    </p>
+
+                    <div class="about-stats">
+                        <div>
+                            <span class="stat-value">12+</span>
+                            <span class="stat-label" data-en="Years Experience" data-ar="سنة خبرة">Years Experience</span>
+                        </div>
+                        <div>
+                            <span class="stat-value">200+</span>
+                            <span class="stat-label" data-en="Campaigns Delivered" data-ar="حملة منفذة">Campaigns Delivered</span>
+                        </div>
+                        <div>
+                            <span class="stat-value">6</span>
+                            <span class="stat-label" data-en="GCC Markets" data-ar="أسواق خليجية">GCC Markets</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-image-wrapper reveal">
+                    <div class="about-image">
+                        <img src="1778137111.png" alt="Luxury Awards Stage">
+                    </div>
+                    <div class="about-quote">
+                        <i data-lucide="quote" class="about-quote-icon w-8 h-8"></i>
+                        <p class="about-quote-text" data-en="We believe every brand has a unique story worth telling with creativity" data-ar="نؤمن بأن كل علامة تجارية لها قصة فريدة تستحق أن تُروى بإبداع">
+                            "We believe every brand has a unique story worth telling with creativity"
+                        </p>
+                        <span class="about-quote-author">— Asem Vision</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission">
+        <div class="container">
+            <div class="mission-content reveal">
+                <span class="section-tagline" data-en="Our Mission" data-ar="رسالتنا">Our Mission</span>
+                <h2 class="section-title">
+                    <span data-en="Empowering Brands" data-ar="تمكين العلامات">Empowering Brands</span><br>
+                    <span data-en="Through Strategy." data-ar="باستراتيجية.">Through Strategy.</span>
+                </h2>
+                <p class="mission-text" data-en="To empower brands and organizations through creative marketing solutions, strategic outreach, and impactful campaigns that build trust and enhance visibility across the Middle East." data-ar="تمكين العلامات التجارية والمؤسسات من خلال حلول تسويقية مبتكرة واستراتيجيات فعالة وحملات مؤثرة تعزز الثقة وتزيد من الظهور في منطقة الشرق الأوسط.">
+                    To empower brands and organizations through creative marketing solutions, strategic outreach, and impactful campaigns that build trust and enhance visibility across the Middle East.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tagline" data-en="Services" data-ar="خدماتنا">Services</span>
+                <h2 class="section-title">
+                    <span data-en="Integrated" data-ar="حلول">Integrated</span><br>
+                    <span data-en="Solutions." data-ar="متكاملة.">Solutions.</span>
+                </h2>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <i data-lucide="megaphone" class="service-icon w-8 h-8"></i>
+                    <h3 class="service-title" data-en="Marketing Campaigns" data-ar="الحملات التسويقية">Marketing Campaigns</h3>
+                    <p class="service-desc" data-en="Promotional & field marketing campaigns designed for maximum impact" data-ar="حملات ترويجية وميدانية مصممة لأقصى تأثير">
+                        Promotional & field marketing campaigns designed for maximum impact
+                    </p>
+                </div>
+
+                <div class="service-card reveal">
+                    <i data-lucide="users" class="service-icon w-8 h-8"></i>
+                    <h3 class="service-title" data-en="Event Management" data-ar="تنظيم الفعاليات">Event Management</h3>
+                    <p class="service-desc" data-en="Full-service festival, conference & corporate event execution" data-ar="تنفيذ متكامل للمهرجانات والمؤتمرات والفعاليات المؤسسية">
+                        Full-service festival, conference & corporate event execution
+                    </p>
+                </div>
+
+                <div class="service-card reveal">
+                    <i data-lucide="target" class="service-icon w-8 h-8"></i>
+                    <h3 class="service-title" data-en="Product Launches" data-ar="تدشين المنتجات">Product Launches</h3>
+                    <p class="service-desc" data-en="Strategic debuts that capture attention and drive adoption" data-ar="إطلاق استراتيجي يجذب الانتباه ويعزز الاعتماد">
+                        Strategic debuts that capture attention and drive adoption
+                    </p>
+                </div>
+
+                <div class="service-card reveal">
+                    <i data-lucide="monitor" class="service-icon w-8 h-8"></i>
+                    <h3 class="service-title" data-en="Digital Marketing" data-ar="التسويق الرقمي">Digital Marketing</h3>
+                    <p class="service-desc" data-en="Content strategy & multi-platform campaign management" data-ar="إستراتيجية المحتوى وإدارة الحملات عبر المنصات">
+                        Content strategy & multi-platform campaign management
+                    </p>
+                </div>
+
+                <div class="service-card reveal">
+                    <i data-lucide="palette" class="service-icon w-8 h-8"></i>
+                    <h3 class="service-title" data-en="Creative Production" data-ar="الإنتاج الإبداعي">Creative Production</h3>
+                    <p class="service-desc" data-en="Graphic design, media production & brand identity development" data-ar="التصميم الجرافيكي، الإنتاج الإعلامي، وتطوير الهوية">
+                        Graphic design, media production & brand identity development
+                    </p>
+                </div>
+
+                <div class="service-card reveal">
+                    <i data-lucide="zap" class="service-icon w-8 h-8"></i>
+                    <h3 class="service-title" data-en="Multi-Channel Execution" data-ar="التنفيذ متعدد القنوات">Multi-Channel Execution</h3>
+                    <p class="service-desc" data-en="Seamless campaign delivery across all touchpoints" data-ar="تسليم سلس للحملات عبر جميع نقاط الاتصال">
+                        Seamless campaign delivery across all touchpoints
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section class="expertise" id="expertise">
+        <div class="container">
+            <div class="expertise-grid">
+                <div class="reveal">
+                    <span class="section-tagline" data-en="Expertise" data-ar="خبراتنا">Expertise</span>
+                    <h2 class="section-title">
+                        <span data-en="Why Partner" data-ar="لماذا تختار">Why Partner</span><br>
+                        <span data-en="With Us." data-ar="شراكتنا.">With Us.</span>
+                    </h2>
+
+                    <div class="expertise-list">
+                        <div class="expertise-item">
+                            <i data-lucide="check-circle" class="expertise-icon w-5 h-5"></i>
+                            <span class="expertise-text" data-en="Strong field execution capabilities across GCC markets" data-ar="خبرة قوية في تنفيذ الحملات الميدانية عبر أسواق الخليج">
+                                Strong field execution capabilities across GCC markets
+                            </span>
+                        </div>
+                        <div class="expertise-item">
+                            <i data-lucide="check-circle" class="expertise-icon w-5 h-5"></i>
+                            <span class="expertise-text" data-en="Established relationships with communities and businesses" data-ar="علاقات واسعة مع المجتمعات والقطاع التجاري">
+                                Established relationships with communities and businesses
+                            </span>
+                        </div>
+                        <div class="expertise-item">
+                            <i data-lucide="check-circle" class="expertise-icon w-5 h-5"></i>
+                            <span class="expertise-text" data-en="Highly trained creative and marketing professionals" data-ar="فريق إبداعي وتسويقي مدرب باحترافية عالية">
+                                Highly trained creative and marketing professionals
+                            </span>
+                        </div>
+                        <div class="expertise-item">
+                            <i data-lucide="check-circle" class="expertise-icon w-5 h-5"></i>
+                            <span class="expertise-text" data-en="Digital campaign management across major platforms" data-ar="إدارة الحملات الرقمية عبر المنصات الرئيسية">
+                                Digital campaign management across major platforms
+                            </span>
+                        </div>
+                        <div class="expertise-item">
+                            <i data-lucide="check-circle" class="expertise-icon w-5 h-5"></i>
+                            <span class="expertise-text" data-en="Real-time reporting and performance analytics" data-ar="تقارير وتحليلات فورية لأداء الحملات">
+                                Real-time reporting and performance analytics
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="expertise-visual reveal">
+                    <video autoplay loop muted playsinline class="expertise-video">
+                        <source src="Why-Partner.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reach Section -->
+    <section class="reach">
+        <div class="container">
+            <div class="reach-content reveal">
+                <span class="section-tagline" data-en="Geographic Reach" data-ar="نطاق العمل">Geographic Reach</span>
+                <h2 class="section-title">
+                    <span data-en="Pan-GCC" data-ar="تغطية">Pan-GCC</span><br>
+                    <span data-en="Coverage." data-ar="شاملة للخليج.">Coverage.</span>
+                </h2>
+                <p class="mission-text" data-en="We operate across multiple markets, delivering campaigns with efficiency and scalability tailored to each audience and cultural context." data-ar="نعمل عبر عدة أسواق وننفذ الحملات بكفاءة عالية مع مراعاة خصوصية كل سوق وجمهور مستهدف وسياق ثقافي.">
+                    We operate across multiple markets, delivering campaigns with efficiency and scalability tailored to each audience and cultural context.
+                </p>
+
+                <div class="reach-flags">
+                    <span class="flag">🇸🇦</span>
+                    <span class="flag">🇦🇪</span>
+                    <span class="flag">🇰🇼</span>
+                    <span class="flag">🇶🇦</span>
+                    <span class="flag">🇧🇭</span>
+                    <span class="flag">🇴🇲</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section class="clients" id="clients">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tagline" data-en="Our Clients" data-ar="عملاؤنا">Our Clients</span>
+                <h2 class="section-title">
+                    <span data-en="Trusted By" data-ar="يثق بنا">Trusted By</span><br>
+                    <span data-en="Leading Brands." data-ar="رواد السوق.">Leading Brands.</span>
+                </h2>
+            </div>
+
+            <div class="clients-grid" id="clientsGrid">
+                <!-- Clients populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Campaigns & Digital Section -->
+    <section class="campaigns-digital" id="campaigns">
+        <div class="container">
+            <div class="campaigns-grid">
+                <div class="reveal">
+                    <span class="section-tagline" data-en="Campaigns" data-ar="حملاتنا">Campaigns</span>
+                    <h2 class="section-title">
+                        <span data-en="Impactful" data-ar="تفعيلات">Impactful</span><br>
+                        <span data-en="Activations." data-ar="مؤثرة.">Activations.</span>
+                    </h2>
+
+                    <div class="campaign-list">
+                        <div class="campaign-item">
+                            <i data-lucide="sparkles" class="campaign-icon w-5 h-5"></i>
+                            <span data-en="Product launches across markets" data-ar="تدشين المنتجات في الأسواق">Product launches across markets</span>
+                        </div>
+                        <div class="campaign-item">
+                            <i data-lucide="sparkles" class="campaign-icon w-5 h-5"></i>
+                            <span data-en="Brand activations and promotions" data-ar="الحملات الترويجية وتنشيط العلامات">Brand activations and promotions</span>
+                        </div>
+                        <div class="campaign-item">
+                            <i data-lucide="sparkles" class="campaign-icon w-5 h-5"></i>
+                            <span data-en="Public awareness campaigns" data-ar="حملات التوعية المجتمعية">Public awareness campaigns</span>
+                        </div>
+                        <div class="campaign-item">
+                            <i data-lucide="sparkles" class="campaign-icon w-5 h-5"></i>
+                            <span data-en="Youth and community initiatives" data-ar="مبادرات الشباب والمجتمع">Youth and community initiatives</span>
+                        </div>
+                        <div class="campaign-item">
+                            <i data-lucide="sparkles" class="campaign-icon w-5 h-5"></i>
+                            <span data-en="Retail and mall activations" data-ar="الفعاليات داخل المراكز التجارية">Retail and mall activations</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="digital" class="reveal">
+                    <span class="section-tagline" data-en="Digital" data-ar="الرقمي">Digital</span>
+                    <h2 class="section-title">
+                        <span data-en="Social Media" data-ar="وسائل التواصل">Social Media</span><br>
+                        <span data-en="Excellence." data-ar="الاجتماعي.">Excellence.</span>
+                    </h2>
+                    <p class="about-text" data-en="Our digital team delivers targeted campaigns through content creation, audience segmentation, and performance-driven strategies to maximize reach and engagement." data-ar="يعمل فريقنا الرقمي على تنفيذ حملات موجهة من خلال صناعة المحتوى واستهداف الجمهور بدقة لتحقيق أعلى مستويات الوصول والتفاعل.">
+                        Our digital team delivers targeted campaigns through content creation, audience segmentation, and performance-driven strategies to maximize reach and engagement.
+                    </p>
+
+                    <div class="digital-social">
+                        <i data-lucide="instagram" class="social-icon w-7 h-7"></i>
+                        <i data-lucide="linkedin" class="social-icon w-7 h-7"></i>
+                        <i data-lucide="twitter" class="social-icon w-7 h-7"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-bg">
+            <img src="https://media.istockphoto.com/id/1212879176/photo/3d-abstract-background-with-ultraviolet-neon-lights-empty-frame-cosmic-landscape-glowing.jpg?s=612x612&w=0&k=20&c=nYd8UzSmcUHwb9us4vmM8oTenkFbw8OhvN6-2Ic748U=" alt="Neon Hyperspace Tunnel">
+        </div>
+        <div class="contact-overlay"></div>
+
+        <div class="contact-content">
+            <h2 class="contact-title">
+                <span data-en="Let's Create" data-ar="لنبتكر">Let's Create</span>
+                <span data-en="Together." data-ar="معاً.">Together.</span>
+            </h2>
+
+            <p class="contact-text" data-en="Ready to elevate your brand presence across the GCC? Our team is ready to bring your vision to life." data-ar="جاهز لرفع حضور علامتك التجارية عبر الخليج؟ فريقنا مستعد لتحويل رؤيتك إلى واقع.">
+                Ready to elevate your brand presence across the GCC? Our team is ready to bring your vision to life.
+            </p>
+
+            <div class="contact-details">
+                <div class="contact-item">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                    <a href="mailto:asemvisionco@gmail.com">asemvisionco@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <i data-lucide="phone" class="w-5 h-5"></i>
+                    <a href="tel:+971505822373">+971 50 582 2373</a>
+                </div>
+            </div>
+
+            <a href="https://wa.me/971505822373?text=Hi%2C%20I%20want%20to%20discuss%20a%20marketing%20project" target="_blank" class="btn-gold" data-en="Start a Conversation" data-ar="ابدأ محادثة">
+                Start a Conversation
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">Asem Vision</div>
+                    <div class="footer-tagline" data-en="Dubai • Integrated Marketing Solutions" data-ar="دبي • حلول تسويق متكاملة">Dubai • Integrated Marketing Solutions</div>
+                </div>
+
+                <div class="footer-links">
+                    <a href="#" class="footer-link" data-en="Privacy" data-ar="الخصوصية">Privacy</a>
+                    <a href="#" class="footer-link" data-en="Terms" data-ar="الشروط">Terms</a>
+                    <a href="#" class="footer-link" data-en="Careers" data-ar="وظائف">Careers</a>
+                </div>
+
+                <div class="footer-copyright" data-en="© 2026 ASEM VISION. All Rights Reserved." data-ar="© 2026 عاصم فيجن. جميع الحقوق محفوظة.">
+                    © 2026 ASEM VISION. All Rights Reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Buttons -->
+    <button class="floating-whatsapp" onclick="window.open('https://wa.me/971505822373?text=Hi%2C%20I%20want%20to%20discuss%20a%20project', '_blank')" aria-label="Chat on WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.485-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+        </svg>
+    </button>
+
+    <button class="floating-email" onclick="window.location.href='mailto:asemvisionco@gmail.com'" aria-label="Send Email">
+        <i data-lucide="mail" class="w-6 h-6"></i>
+    </button>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Language State
+        let currentLang = 'en';
+        const clientsData = {
+            en: ['Samsung Mobile', 'London Dairy', 'Sero Mobility', 'Capo Dairy', 'Sayga', 'Livguard', 'Chisage', 'Black Dragon', 'Gold & Sun', 'Tang', 'Dabur Amla', 'Cadbury', 'Unilever'],
+            ar: ['سامسونج موبايل', 'لندن ديري', 'سيرو للتنقل', 'كابو للألبان', 'سيقا', 'ليفغارد', 'شيساج', 'بلاك دراقون', 'قولد إن صن', 'تانج', 'دابر أملا', 'كادبوري', 'يونيلفر']
+        };
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Language Toggle
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            const html = document.documentElement;
+            const body = document.body;
+
+            if (currentLang === 'ar') {
+                html.setAttribute('dir', 'rtl');
+                html.setAttribute('lang', 'ar');
+                body.classList.add('rtl');
+                document.getElementById('langToggle').textContent = '🇬🇧 English';
+                document.getElementById('mobileLangToggle').textContent = '🇬🇧 التبديل للإنجليزية';
+            } else {
+                html.setAttribute('dir', 'ltr');
+                html.setAttribute('lang', 'en');
+                body.classList.remove('rtl');
+                document.getElementById('langToggle').textContent = '🇸🇦 العربية';
+                document.getElementById('mobileLangToggle').textContent = '🇸🇦 Switch to Arabic';
+            }
+
+            updateContent();
+            renderClients();
+        }
+
+        // Update Content Based on Language
+        function updateContent() {
+            document.querySelectorAll('[data-en]').forEach(el => {
+                el.textContent = el.getAttribute(`data-${currentLang}`);
+            });
+
+            // Re-initialize icons after content update
+            setTimeout(() => lucide.createIcons(), 100);
+        }
+
+        // Render Clients
+        function renderClients() {
+            const grid = document.getElementById('clientsGrid');
+            grid.innerHTML = '';
+
+            clientsData[currentLang].forEach((client, index) => {
+                const card = document.createElement('div');
+                card.className = 'client-card';
+                card.style.transitionDelay = `${index * 0.05}s`;
+                card.innerHTML = `<span class="client-name">${client}</span>`;
+                grid.appendChild(card);
+            });
+
+            // Trigger animation
+            setTimeout(() => {
+                document.querySelectorAll('.client-card').forEach(card => {
+                    card.classList.add('visible');
+                });
+            }, 100);
+        }
+
+        // Scroll Light Ring Animation (only runs on desktop)
+        const scrollLightRing = document.getElementById('scrollLightRing');
+        if (window.innerWidth > 768) {
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = scrollY / docHeight;
+
+                const yPos = 12 + (scrollPercent * 70);
+                const xPos = currentLang === 'ar' ? 76 - (scrollPercent * 5) : 76 + (scrollPercent * 5);
+
+                scrollLightRing.style.top = `${yPos}vh`;
+                scrollLightRing.style.left = `${xPos}vw`;
+                scrollLightRing.style.transform = `rotate(${scrollPercent * 180}deg) scale(${0.72 + (scrollPercent * 0.18)})`;
+            });
+        }
+
+        // Intersection Observer for Reveal Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+
+                    if (entry.target.classList.contains('expertise-list')) {
+                        const items = entry.target.querySelectorAll('.expertise-item');
+                        items.forEach((item, index) => {
+                            setTimeout(() => item.classList.add('visible'), index * 100);
+                        });
+                    }
+
+                    if (entry.target.classList.contains('campaign-list')) {
+                        const items = entry.target.querySelectorAll('.campaign-item');
+                        items.forEach((item, index) => {
+                            setTimeout(() => item.classList.add('visible'), index * 100);
+                        });
+                    }
+
+                    if (entry.target.classList.contains('reach-flags')) {
+                        const flags = entry.target.querySelectorAll('.flag');
+                        flags.forEach((flag, index) => {
+                            setTimeout(() => flag.classList.add('visible'), index * 100);
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements
+        document.querySelectorAll('.reveal, .expertise-list, .campaign-list, .reach-flags').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Initialize
+        renderClients();
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect to hero (light on mobile)
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroBg = document.querySelector('.hero-bg img');
+            if (heroBg && window.innerWidth > 768) {
+                heroBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
