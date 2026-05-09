@@ -48,7 +48,7 @@
         }
 
         body {
-            font-family: 'Manrope', sans-serif; /* PRIMARY ENGLISH FONT */
+            font-family: 'Manrope', sans-serif;
             background-color: var(--black-primary);
             color: var(--text-primary);
             overflow-x: hidden;
@@ -56,9 +56,18 @@
         }
 
             body.rtl {
-                font-family: 'IBM Plex Sans Arabic', sans-serif; /* PRIMARY ARABIC FONT */
+                font-family: 'IBM Plex Sans Arabic', sans-serif;
                 direction: rtl;
             }
+                /* ✅ HERO TITLE ARABIC SPACING */
+                body.rtl .hero-title {
+                    line-height: 1.7 !important;
+                }
+
+                /* ✅ SECTION TITLES ARABIC SPACING */
+                body.rtl .section-title {
+                    line-height: 1.5 !important;
+                }
 
         /* ✅ Noise Overlay */
         .noise-overlay {
@@ -182,13 +191,13 @@
         .rtl .font-mono {
             font-family: 'IBM Plex Sans Arabic', sans-serif;
         }
-        /* Arabic monospace fallback */
 
         h1, h2, h3, h4, h5, h6 {
             font-weight: 400;
             line-height: 1.1;
         }
-        /* LUXURY HEADINGS: Playfair Display only for English (LTR) */
+
+        /* ✅ LUXURY HEADINGS: Playfair Display ONLY for English (LTR) */
         body:not(.rtl) h1,
         body:not(.rtl) h2,
         body:not(.rtl) h3,
@@ -197,7 +206,8 @@
         body:not(.rtl) h6,
         body:not(.rtl) .hero-title,
         body:not(.rtl) .section-title,
-        body:not(.rtl) .contact-title {
+        body:not(.rtl) .contact-title,
+        body:not(.rtl) .investment-content h2 {
             font-family: 'Playfair Display', serif;
         }
 
@@ -555,6 +565,25 @@
                 display: inline-block;
             }
 
+                .hero-title span::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -0.5rem;
+                    left: 0;
+                    width: 100%;
+                    height: 2px;
+                    background: linear-gradient(90deg, var(--gold-primary), transparent);
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    animation: underlineReveal 1.2s var(--transition-smooth) 0.8s forwards;
+                }
+
+        @keyframes underlineReveal {
+            to {
+                transform: scaleX(1);
+            }
+        }
+
         .hero-subtitle {
             font-size: 1.125rem;
             color: var(--text-secondary);
@@ -844,10 +873,10 @@
             position: relative;
             z-index: 10;
         }
-
+        /* ✅ SERVICE DESCRIPTIONS - GOLD COLOR */
         .service-desc {
             font-size: 0.875rem;
-            color: var(--text-tertiary);
+            color: var(--gold-light);
             font-weight: 300;
             line-height: 1.7;
             position: relative;
@@ -958,15 +987,14 @@
                 transform: scale(1);
             }
 
-        /* ✅ Clients Section - Infinite Scroll */
-        /* ✅ CLIENTS SECTION - PERFORMANCE OPTIMIZED */
+        /* ✅ Clients Section - Infinite Scroll (Performance Optimized) */
         .clients {
             background: var(--black-primary);
             overflow: hidden;
             padding: 6rem 0;
             -webkit-overflow-scrolling: touch;
         }
-        /* ==================== CLIENTS MARQUEE - FIXED FOR LTR + RTL ==================== */
+
         .clients-grid {
             display: flex;
             gap: 3rem;
@@ -1132,7 +1160,7 @@
             font-family: 'Manrope', sans-serif;
             margin-bottom: 35px;
         }
-        /* Arabic override for investment tag if needed */
+
         body.rtl .investment-tag {
             font-family: 'IBM Plex Sans Arabic', sans-serif;
         }
@@ -1146,7 +1174,7 @@
             color: var(--text-primary);
             margin-bottom: 35px;
         }
-        /* Arabic heading fallback for investment */
+
         body.rtl .investment-content h2 {
             font-family: 'IBM Plex Sans Arabic', sans-serif;
         }
@@ -1159,7 +1187,7 @@
             max-width: 760px;
             margin: auto auto 50px;
         }
-        /* English paragraph in investment can stay Manrope (inherited) */
+
         body:not(.rtl) .investment-content p {
             font-family: 'Manrope', sans-serif;
         }
@@ -1172,8 +1200,7 @@
             flex-wrap: wrap;
         }
 
-        .primary-btn,
-        .secondary-btn {
+        .primary-btn, .secondary-btn {
             text-decoration: none;
             padding: 16px 34px;
             border-radius: 100px;
@@ -1769,6 +1796,35 @@
                 transform: translateX(-50%) translateY(10px);
             }
         }
+
+        /* ✅ ARABIC FONT FALLBACK: Force IBM Plex Sans Arabic for all RTL content */
+        body.rtl p,
+        body.rtl span,
+        body.rtl h1, body.rtl h2, body.rtl h3, body.rtl h4, body.rtl h5, body.rtl h6,
+        body.rtl .btn-primary, body.rtl .btn-gold, body.rtl .primary-btn, body.rtl .secondary-btn,
+        body.rtl .nav-link, body.rtl .mobile-link,
+        body.rtl .section-tagline, body.rtl .hero-tagline, body.rtl .investment-tag,
+        body.rtl .client-name, body.rtl .service-title, body.rtl .service-desc,
+        body.rtl .expertise-text, body.rtl .campaign-item span,
+        body.rtl .contact-text, body.rtl .contact-license span,
+        body.rtl .footer-tagline, body.rtl .footer-copyright,
+        body.rtl .investment-content p,
+        body.rtl [data-ar] {
+            font-family: 'IBM Plex Sans Arabic', sans-serif !important;
+        }
+
+        /* ✅ RTL Monospace/Tag Elements */
+        .rtl .font-mono,
+        .rtl .hero-tagline,
+        .rtl .section-tagline,
+        .rtl .investment-tag,
+        body.rtl .btn-primary,
+        body.rtl .btn-gold,
+        body.rtl .primary-btn,
+        body.rtl .secondary-btn {
+            font-family: 'IBM Plex Sans Arabic', sans-serif !important;
+            letter-spacing: normal;
+        }
     </style>
 </head>
 <body>
@@ -1778,24 +1834,15 @@
     <!-- Scroll Light Ring (hidden on mobile) -->
     <div class="scroll-light-ring" id="scrollLightRing">
         <div class="scroll-light-ring-inner">
-            <div class="scroll-ring-outer"></div>
-            <div class="scroll-ring-inner"></div>
-            <div class="scroll-ring-center"></div>
-            <div class="scroll-ring-particles">
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-            </div>
+            <div class="scroll-ring-outer"></div><div class="scroll-ring-inner"></div><div class="scroll-ring-center"></div>
+            <div class="scroll-ring-particles"><div class="particle"></div><div class="particle"></div><div class="particle"></div></div>
         </div>
     </div>
 
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#home" class="nav-logo">
-                <img src="asem-vision-logo.png" alt="Asem Vision Logo" class="nav-logo-img">
-            </a>
-
+            <a href="#home" class="nav-logo"><img src="asem-vision-logo.png" alt="Asem Vision Logo" class="nav-logo-img"></a>
             <div class="nav-menu">
                 <a href="#home" class="nav-link" data-en="Home" data-ar="الرئيسية">Home</a>
                 <a href="#about" class="nav-link" data-en="About" data-ar="من نحن">About</a>
@@ -1808,10 +1855,7 @@
                 <button class="btn-primary" onclick="toggleLanguage()" id="langToggle">🇸 العربية</button>
                 <a href="https://wa.me/971505822373" target="_blank" class="btn-primary" data-en="Get a Quote" data-ar="احصل على عرض">Get a Quote</a>
             </div>
-
-            <button class="nav-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
-                <i data-lucide="menu" class="w-6 h-6"></i>
-            </button>
+            <button class="nav-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu"><i data-lucide="menu" class="w-6 h-6"></i></button>
         </div>
     </nav>
 
@@ -1830,26 +1874,14 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="video-bg">
-            <video autoplay loop muted playsinline preload="auto" poster="1778137111.png">
-                <source src="hero-video-file.mp4" type="video/mp4" />
-                <source src="gold-background.webm" type="video/webm" />
-                Your browser does not support the video tag.
-            </video>
-        </div>
+        <div class="video-bg"><video autoplay loop muted playsinline preload="auto" poster="1778137111.png"><source src="hero-video-file.mp4" type="video/mp4" /><source src="gold-background.webm" type="video/webm" />Your browser does not support the video tag.</video></div>
         <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content">
                 <span class="hero-tagline" data-en="Integrated Marketing, Events & Brand Activation Across the GCC" data-ar="حلول تسويق متكاملة وتنظيم فعاليات في دول الخليج">Integrated Marketing, Events & Brand Activation Across the GCC</span>
-                <h1 class="hero-title">
-                    <span data-en="We Create Impactful" data-ar="نضع علامتك التجارية في القمة">We Create Impactful</span><br>
-                    <span data-en="Brand Experiences." data-ar="من خلال اساليب ابداعية مدهشة.">Brand Experiences.</span>
-                </h1>
+                <h1 class="hero-title"><span data-en="We Create Impactful" data-ar="نضع علامتك التجارية في القمة">We Create Impactful</span><br><span data-en="Brand Experiences." data-ar="من خلال اساليب ابداعية مدهشة.">Brand Experiences.</span></h1>
                 <p class="hero-subtitle" data-en="We connect brands with their audiences through creativity, strategy, and flawless execution across the Gulf region." data-ar="نربط العلامات التجارية بجمهورها من خلال الإبداع والاستراتيجية والتنفيذ الاحترافي عبر منطقة الخليج.">We connect brands with their audiences through creativity, strategy, and flawless execution across the Gulf region.</p>
-                <div class="hero-cta">
-                    <a href="#services" class="btn-primary"><span data-en="Explore Services" data-ar="استكشف خدماتنا">Explore Services</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
-                    <a href="#contact" class="btn-primary" data-en="Start Your Project" data-ar="ابدأ مشروعك">Start Your Project</a>
-                </div>
+                <div class="hero-cta"><a href="#services" class="btn-primary"><span data-en="Explore Services" data-ar="استكشف خدماتنا">Explore Services</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a><a href="#contact" class="btn-primary" data-en="Start Your Project" data-ar="ابدأ مشروعك">Start Your Project</a></div>
             </div>
         </div>
         <div class="hero-scroll"><i data-lucide="chevron-down" class="w-8 h-8"></i></div>
@@ -1863,49 +1895,27 @@
                     <span class="section-tagline" data-en="About Us" data-ar="من نحن">About Us</span>
                     <h2 class="section-title"><span data-en="Excellence Since" data-ar="تميز منذ">Excellence Since</span><br><span data-en="2012." data-ar="2012.">2012.</span></h2>
                     <p class="about-text" data-en="Asem Vision is a marketing, advertising, and event management company. We provide integrated solutions across field marketing, digital campaigns, and event execution. With extensive experience and a highly trained team, we deliver campaigns that combine creativity with cultural understanding." data-ar="عاصم فيجن شركة متخصصة في التسويق والإعلان وتنظيم الفعاليات. نقدم حلولاً متكاملة تشمل الحملات الميدانية، التسويق الرقمي، وتنفيذ الفعاليات. نمتلك فريقاً محترفاً وخبرة واسعة تتيح لنا تقديم حملات تجمع بين الإبداع وفهم السوق.">Asem Vision is a marketing, advertising, and event management company. We provide integrated solutions across field marketing, digital campaigns, and event execution. With extensive experience and a highly trained team, we deliver campaigns that combine creativity with cultural understanding.</p>
-                    <div class="about-stats">
-                        <div><span class="stat-value">12+</span><span class="stat-label" data-en="Years Experience" data-ar="سنة خبرة">Years Experience</span></div>
-                        <div><span class="stat-value">200+</span><span class="stat-label" data-en="Campaigns Delivered" data-ar="حملة منفذة">Campaigns Delivered</span></div>
-                        <div><span class="stat-value">6</span><span class="stat-label" data-en="GCC Markets" data-ar="أسواق خليجية">GCC Markets</span></div>
-                    </div>
+                    <div class="about-stats"><div><span class="stat-value">12+</span><span class="stat-label" data-en="Years Experience" data-ar="سنة خبرة">Years Experience</span></div><div><span class="stat-value">200+</span><span class="stat-label" data-en="Campaigns Delivered" data-ar="حملة منفذة">Campaigns Delivered</span></div><div><span class="stat-value">6</span><span class="stat-label" data-en="GCC Markets" data-ar="أسواق خليجية">GCC Markets</span></div></div>
                 </div>
-                <div class="about-image-wrapper reveal">
-                    <div class="about-image"><img src="1778137111.png" alt="Luxury Awards Stage"></div>
-                    <div class="about-quote">
-                        <i data-lucide="quote" class="about-quote-icon w-8 h-8"></i>
-                        <p class="about-quote-text" data-en="We believe every brand has a unique story worth telling with creativity" data-ar="نؤمن بأن كل علامة تجارية لها قصة فريدة تستحق أن تُروى بإبداع">"We believe every brand has a unique story worth telling with creativity"</p>
-                        <span class="about-quote-author">— Asem Vision</span>
-                    </div>
-                </div>
+                <div class="about-image-wrapper reveal"><div class="about-image"><img src="1778137111.png" alt="Luxury Awards Stage"></div><div class="about-quote"><i data-lucide="quote" class="about-quote-icon w-8 h-8"></i><p class="about-quote-text" data-en="We believe every brand has a unique story worth telling with creativity" data-ar="نؤمن بأن كل علامة تجارية لها قصة فريدة تستحق أن تُروى بإبداع">"We believe every brand has a unique story worth telling with creativity"</p><span class="about-quote-author">— Asem Vision</span></div></div>
             </div>
         </div>
     </section>
 
     <!-- Mission Section -->
-    <section class="mission">
-        <div class="container">
-            <div class="mission-content reveal">
-                <span class="section-tagline" data-en="Our Mission" data-ar="رسالتنا">Our Mission</span>
-                <h2 class="section-title"><span data-en="Empowering Brands" data-ar="تمكين العلامات">Empowering Brands</span><br><span data-en="Through Strategy." data-ar="باستراتيجية.">Through Strategy.</span></h2>
-                <p class="mission-text" data-en="To empower brands and organizations through creative marketing solutions, strategic outreach, and impactful campaigns that build trust and enhance visibility across the Middle East." data-ar="تمكين العلامات التجارية والمؤسسات من خلال حلول تسويقية مبتكرة واستراتيجيات فعالة وحملات مؤثرة تعزز الثقة وتزيد من الظهور في منطقة الشرق الأوسط.">To empower brands and organizations through creative marketing solutions, strategic outreach, and impactful campaigns that build trust and enhance visibility across the Middle East.</p>
-            </div>
-        </div>
-    </section>
+    <section class="mission"><div class="container"><div class="mission-content reveal"><span class="section-tagline" data-en="Our Mission" data-ar="رسالتنا">Our Mission</span><h2 class="section-title"><span data-en="Empowering Brands" data-ar="تمكين العلامات">Empowering Brands</span><br><span data-en="Through Strategy." data-ar="باستراتيجية.">Through Strategy.</span></h2><p class="mission-text" data-en="To empower brands and organizations through creative marketing solutions, strategic outreach, and impactful campaigns that build trust and enhance visibility across the Middle East." data-ar="تمكين العلامات التجارية والمؤسسات من خلال حلول تسويقية مبتكرة واستراتيجيات فعالة وحملات مؤثرة تعزز الثقة وتزيد من الظهور في منطقة الشرق الأوسط.">To empower brands and organizations through creative marketing solutions, strategic outreach, and impactful campaigns that build trust and enhance visibility across the Middle East.</p></div></div></section>
 
     <!-- Services Section -->
     <section class="services" id="services">
         <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tagline" data-en="Services" data-ar="خدماتنا">Services</span>
-                <h2 class="section-title"><span data-en="Integrated" data-ar="حلول">Integrated</span><br><span data-en="Solutions." data-ar="متكاملة.">Solutions.</span></h2>
-            </div>
+            <div class="section-header reveal"><span class="section-tagline" data-en="Services" data-ar="خدماتنا">Services</span><h2 class="section-title"><span data-en="Integrated" data-ar="حلول">Integrated</span><br><span data-en="Solutions." data-ar="متكاملة.">Solutions.</span></h2></div>
             <div class="services-grid">
                 <div class="service-card reveal"><i data-lucide="megaphone" class="service-icon w-8 h-8"></i><h3 class="service-title" data-en="Marketing Campaigns" data-ar="الحملات التسويقية">Marketing Campaigns</h3><p class="service-desc" data-en="Promotional & field marketing campaigns designed for maximum impact" data-ar="حملات ترويجية وميدانية مصممة لأقصى تأثير">Promotional & field marketing campaigns designed for maximum impact</p></div>
                 <div class="service-card reveal"><i data-lucide="users" class="service-icon w-8 h-8"></i><h3 class="service-title" data-en="Event Management" data-ar="تنظيم الفعاليات">Event Management</h3><p class="service-desc" data-en="Full-service festival, conference & corporate event execution" data-ar="تنفيذ متكامل للمهرجانات والمؤتمرات والفعاليات المؤسسية">Full-service festival, conference & corporate event execution</p></div>
                 <div class="service-card reveal"><i data-lucide="target" class="service-icon w-8 h-8"></i><h3 class="service-title" data-en="Product Launches" data-ar="تدشين المنتجات">Product Launches</h3><p class="service-desc" data-en="Strategic debuts that capture attention and drive adoption" data-ar="إطلاق استراتيجي يجذب الانتباه ويعزز الاعتماد">Strategic debuts that capture attention and drive adoption</p></div>
                 <div class="service-card reveal"><i data-lucide="monitor" class="service-icon w-8 h-8"></i><h3 class="service-title" data-en="Digital Marketing" data-ar="التسويق الرقمي">Digital Marketing</h3><p class="service-desc" data-en="Content strategy & multi-platform campaign management" data-ar="إستراتيجية المحتوى وإدارة الحملات عبر المنصات">Content strategy & multi-platform campaign management</p></div>
                 <div class="service-card reveal"><i data-lucide="palette" class="service-icon w-8 h-8"></i><h3 class="service-title" data-en="Creative Production" data-ar="الإنتاج الإبداعي">Creative Production</h3><p class="service-desc" data-en="Graphic design, media production & brand identity development" data-ar="التصميم الجرافيكي، الإنتاج الإعلامي، وتطوير الهوية">Graphic design, media production & brand identity development</p></div>
-                <div class="service-card reveal"><i data-lucide="zap" class="service-icon w-8 h-8"></i><h3 class="service-title" data-en="Multi-Channel Execution" data-ar="التنفيذ متعدد القنوات">Multi-Channel Execution</h3><p class="service-desc" data-en="Seamless campaign delivery across all touchpoints" data-ar="تسليم سلس للحملات عبر جميع نقاط الاتصال">Seamless campaign delivery across all touchpoints</p></div>
+                <div class="service-card reveal"><i data-lucide="zap" class="service-icon w-8 h-8"></i><h3 class="service-title" data-en="Multi-Channel Execution" data-ar="التنفيذ متعدد القنوات">Multi-Channel Execution</h3><p class="service-desc" data-en="Seamless campaign delivery across all touchpoints" data-ar="تنفيذ متفرد للحملات الترويجيه عبر القنوات الرقمية">Seamless campaign delivery across all touchpoints</p></div>
             </div>
         </div>
     </section>
@@ -1914,37 +1924,14 @@
     <section class="expertise" id="expertise">
         <div class="container">
             <div class="expertise-grid">
-                <div class="reveal">
-                    <span class="section-tagline" data-en="Expertise" data-ar="خبراتنا">Expertise</span>
-                    <h2 class="section-title"><span data-en="Why Partner" data-ar="لماذا تختار">Why Partner</span><br><span data-en="With Us." data-ar="شراكتنا.">With Us.</span></h2>
-                    <div class="expertise-list">
-                        <div class="expertise-item"><i data-lucide="check-circle" class="expertise-icon w-5 h-5"></i><span class="expertise-text" data-en="Strong field execution capabilities across GCC markets" data-ar="خبرة قوية في تنفيذ الحملات الميدانية عبر أسواق الخليج">Strong field execution capabilities across GCC markets</span></div>
-                        <div class="expertise-item"><i data-lucide="check-circle" class="expertise-icon w-5 h-5"></i><span class="expertise-text" data-en="Established relationships with communities and businesses" data-ar="علاقات واسعة مع المجتمعات والقطاع التجاري">Established relationships with communities and businesses</span></div>
-                        <div class="expertise-item"><i data-lucide="check-circle" class="expertise-icon w-5 h-5"></i><span class="expertise-text" data-en="Highly trained creative and marketing professionals" data-ar="فريق إبداعي وتسويقي مدرب باحترافية عالية">Highly trained creative and marketing professionals</span></div>
-                        <div class="expertise-item"><i data-lucide="check-circle" class="expertise-icon w-5 h-5"></i><span class="expertise-text" data-en="Digital campaign management across major platforms" data-ar="إدارة الحملات الرقمية عبر المنصات الرئيسية">Digital campaign management across major platforms</span></div>
-                        <div class="expertise-item"><i data-lucide="check-circle" class="expertise-icon w-5 h-5"></i><span class="expertise-text" data-en="Real-time reporting and performance analytics" data-ar="تقارير وتحليلات فورية لأداء الحملات">Real-time reporting and performance analytics</span></div>
-                    </div>
-                </div>
-                <div class="expertise-visual reveal">
-                    <video autoplay loop muted playsinline class="expertise-video"><source src="Why-Partner.mp4" type="video/mp4"></video>
-                </div>
+                <div class="reveal"><span class="section-tagline" data-en="Expertise" data-ar="خبراتنا">Expertise</span><h2 class="section-title"><span data-en="Why Partner" data-ar="لماذا تختار">Why Partner</span><br><span data-en="With Us." data-ar="شراكتنا.">With Us.</span></h2><div class="expertise-list"><div class="expertise-item"><i data-lucide="check-circle" class="expertise-icon w-5 h-5"></i><span class="expertise-text" data-en="Strong field execution capabilities across GCC markets" data-ar="خبرة قوية في تنفيذ الحملات الميدانية عبر أسواق الخليج">Strong field execution capabilities across GCC markets</span></div><div class="expertise-item"><i data-lucide="check-circle" class="expertise-icon w-5 h-5"></i><span class="expertise-text" data-en="Established relationships with communities and businesses" data-ar="علاقات واسعة مع المجتمعات والقطاع التجاري">Established relationships with communities and businesses</span></div><div class="expertise-item"><i data-lucide="check-circle" class="expertise-icon w-5 h-5"></i><span class="expertise-text" data-en="Highly trained creative and marketing professionals" data-ar="فريق إبداعي وتسويقي مدرب باحترافية عالية">Highly trained creative and marketing professionals</span></div><div class="expertise-item"><i data-lucide="check-circle" class="expertise-icon w-5 h-5"></i><span class="expertise-text" data-en="Digital campaign management across major platforms" data-ar="إدارة الحملات الرقمية عبر المنصات الرئيسية">Digital campaign management across major platforms</span></div><div class="expertise-item"><i data-lucide="check-circle" class="expertise-icon w-5 h-5"></i><span class="expertise-text" data-en="Real-time reporting and performance analytics" data-ar="تقارير وتحليلات فورية لأداء الحملات">Real-time reporting and performance analytics</span></div></div></div>
+                <div class="expertise-visual reveal"><video autoplay loop muted playsinline class="expertise-video"><source src="Why-Partner.mp4" type="video/mp4"></video></div>
             </div>
         </div>
     </section>
 
     <!-- Reach Section -->
-    <section class="reach">
-        <div class="container">
-            <div class="reach-content reveal">
-                <span class="section-tagline" data-en="Geographic Reach" data-ar="نطاق العمل">Geographic Reach</span>
-                <h2 class="section-title"><span data-en="Pan-GCC" data-ar="تغطية">Pan-GCC</span><br><span data-en="Coverage." data-ar="شاملة للخليج.">Coverage.</span></h2>
-                <p class="mission-text" data-en="We operate across multiple markets, delivering campaigns with efficiency and scalability tailored to each audience and cultural context." data-ar="نعمل عبر عدة أسواق وننفذ الحملات بكفاءة عالية مع مراعاة خصوصية كل سوق وجمهور مستهدف وسياق ثقافي.">We operate across multiple markets, delivering campaigns with efficiency and scalability tailored to each audience and cultural context.</p>
-                <div class="reach-flags">
-                    <span class="flag">🇸🇦</span><span class="flag">🇦🇪</span><span class="flag">🇰🇼</span><span class="flag">🇶🇦</span><span class="flag">🇧🇭</span><span class="flag">🇴🇲</span>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section class="reach"><div class="container"><div class="reach-content reveal"><span class="section-tagline" data-en="Geographic Reach" data-ar="نطاق العمل">Geographic Reach</span><h2 class="section-title"><span data-en="Pan-GCC" data-ar="تغطية">Pan-GCC</span><br><span data-en="Coverage." data-ar="شاملة للخليج.">Coverage.</span></h2><p class="mission-text" data-en="We operate across multiple markets, delivering campaigns with efficiency and scalability tailored to each audience and cultural context." data-ar="نعمل عبر عدة أسواق وننفذ الحملات بكفاءة عالية مع مراعاة خصوصية كل سوق وجمهور مستهدف وسياق ثقافي.">We operate across multiple markets, delivering campaigns with efficiency and scalability tailored to each audience and cultural context.</p><div class="reach-flags"><span class="flag">🇸🇦</span><span class="flag">🇦🇪</span><span class="flag">🇰🇼</span><span class="flag">🇶🇦</span><span class="flag">🇧🇭</span><span class="flag">🇴🇲</span></div></div></div></section>
 
     <!-- Clients Section - Infinite Scroll -->
     <section class="clients" id="clients">
@@ -1961,23 +1948,8 @@
     <section class="campaigns-digital" id="campaigns">
         <div class="container">
             <div class="campaigns-grid">
-                <div class="reveal">
-                    <span class="section-tagline" data-en="Campaigns" data-ar="حملاتنا">Campaigns</span>
-                    <h2 class="section-title"><span data-en="Impactful" data-ar="تفعيلات">Impactful</span><br><span data-en="Activations." data-ar="مؤثرة.">Activations.</span></h2>
-                    <div class="campaign-list">
-                        <div class="campaign-item"><i data-lucide="sparkles" class="campaign-icon w-5 h-5"></i><span data-en="Product launches across markets" data-ar="تدشين المنتجات في الأسواق">Product launches across markets</span></div>
-                        <div class="campaign-item"><i data-lucide="sparkles" class="campaign-icon w-5 h-5"></i><span data-en="Brand activations and promotions" data-ar="الحملات الترويجية وتنشيط العلامات">Brand activations and promotions</span></div>
-                        <div class="campaign-item"><i data-lucide="sparkles" class="campaign-icon w-5 h-5"></i><span data-en="Public awareness campaigns" data-ar="حملات التوعية المجتمعية">Public awareness campaigns</span></div>
-                        <div class="campaign-item"><i data-lucide="sparkles" class="campaign-icon w-5 h-5"></i><span data-en="Youth and community initiatives" data-ar="مبادرات الشباب والمجتمع">Youth and community initiatives</span></div>
-                        <div class="campaign-item"><i data-lucide="sparkles" class="campaign-icon w-5 h-5"></i><span data-en="Retail and mall activations" data-ar="الفعاليات داخل المراكز التجارية">Retail and mall activations</span></div>
-                    </div>
-                </div>
-                <div id="digital" class="reveal">
-                    <span class="section-tagline" data-en="Digital" data-ar="الرقمي">Digital</span>
-                    <h2 class="section-title"><span data-en="Social Media" data-ar="وسائل التواصل">Social Media</span><br><span data-en="Excellence." data-ar="الاجتماعي.">Excellence.</span></h2>
-                    <p class="about-text" data-en="Our digital team delivers targeted campaigns through content creation, audience segmentation, and performance-driven strategies to maximize reach and engagement." data-ar="يعمل فريقنا الرقمي على تنفيذ حملات موجهة من خلال صناعة المحتوى واستهداف الجمهور بدقة لتحقيق أعلى مستويات الوصول والتفاعل.">Our digital team delivers targeted campaigns through content creation, audience segmentation, and performance-driven strategies to maximize reach and engagement.</p>
-                    <div class="digital-social"><i data-lucide="instagram" class="social-icon w-7 h-7"></i><i data-lucide="linkedin" class="social-icon w-7 h-7"></i><i data-lucide="twitter" class="social-icon w-7 h-7"></i></div>
-                </div>
+                <div class="reveal"><span class="section-tagline" data-en="Campaigns" data-ar="حملاتنا">Campaigns</span><h2 class="section-title"><span data-en="Impactful" data-ar="تفعيلات">Impactful</span><br><span data-en="Activations." data-ar="مؤثرة.">Activations.</span></h2><div class="campaign-list"><div class="campaign-item"><i data-lucide="sparkles" class="campaign-icon w-5 h-5"></i><span data-en="Product launches across markets" data-ar="تدشين المنتجات في الأسواق">Product launches across markets</span></div><div class="campaign-item"><i data-lucide="sparkles" class="campaign-icon w-5 h-5"></i><span data-en="Brand activations and promotions" data-ar="الحملات الترويجية وتنشيط العلامات">Brand activations and promotions</span></div><div class="campaign-item"><i data-lucide="sparkles" class="campaign-icon w-5 h-5"></i><span data-en="Public awareness campaigns" data-ar="حملات التوعية المجتمعية">Public awareness campaigns</span></div><div class="campaign-item"><i data-lucide="sparkles" class="campaign-icon w-5 h-5"></i><span data-en="Youth and community initiatives" data-ar="مبادرات الشباب والمجتمع">Youth and community initiatives</span></div><div class="campaign-item"><i data-lucide="sparkles" class="campaign-icon w-5 h-5"></i><span data-en="Retail and mall activations" data-ar="الفعاليات داخل المراكز التجارية">Retail and mall activations</span></div></div></div>
+                <div id="digital" class="reveal"><span class="section-tagline" data-en="Digital" data-ar="الرقمي">Digital</span><h2 class="section-title"><span data-en="Social Media" data-ar="وسائل التواصل">Social Media</span><br><span data-en="Excellence." data-ar="الاجتماعي.">Excellence.</span></h2><p class="about-text" data-en="Our digital team delivers targeted campaigns through content creation, audience segmentation, and performance-driven strategies to maximize reach and engagement." data-ar="يعمل فريقنا الرقمي على تنفيذ حملات موجهة من خلال صناعة المحتوى واستهداف الجمهور بدقة لتحقيق أعلى مستويات الوصول والتفاعل.">Our digital team delivers targeted campaigns through content creation, audience segmentation, and performance-driven strategies to maximize reach and engagement.</p><div class="digital-social"><i data-lucide="instagram" class="social-icon w-7 h-7"></i><i data-lucide="linkedin" class="social-icon w-7 h-7"></i><i data-lucide="twitter" class="social-icon w-7 h-7"></i></div></div>
             </div>
         </div>
     </section>
@@ -1986,69 +1958,25 @@
     <section class="global-investment-section" id="investment">
         <div class="investment-container">
             <div class="investment-content">
-                <span class="investment-tag" data-en="Global Investment Solutions" data-ar="حلول الاستثمار العالمية">
-                    Global Investment Solutions
-                </span>
-                <h2 data-en="Expand Beyond Borders With Strategic Global Investments" data-ar="توسع عبر الحدود مع استثمارات عالمية استراتيجية">
-                    Expand Beyond Borders With Strategic Global Investments
-                </h2>
-                <p data-en="We help visionary businesses and investors unlock premium international opportunities through intelligent market positioning, luxury branding, and high-impact global expansion strategies tailored for the GCC market." data-ar="نساعد الشركات والمستثمرين ذوي الرؤية على اكتشاف الفرص الدولية المتميزة من خلال التموضع الذكي في الأسواق، والعلامات التجارية الفاخرة، واستراتيجيات التوسع العالمي عالية التأثير المصممة خصيصًا لسوق الخليج.">
-                    We help visionary businesses and investors unlock premium international opportunities through intelligent market positioning, luxury branding, and high-impact global expansion strategies tailored for the GCC market.
-                </p>
-                <div class="investment-buttons">
-                    <a href="#contact" class="primary-btn" data-en="Explore Opportunities" data-ar="استكشف الفرص">
-                        Explore Opportunities
-                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </a>
-                    <a href="https://wa.me/971505822373" target="_blank" class="secondary-btn" data-en="Learn More" data-ar="اعرف المزيد">
-                        Learn More
-                    </a>
-                </div>
+                <span class="investment-tag" data-en="Global Investment Solutions" data-ar="حلول الاستثمار العالمية">Global Investment Solutions</span>
+                <h2 data-en="Expand Beyond Borders With Strategic Global Investments" data-ar="توسع عبر الحدود مع استثمارات عالمية استراتيجية">Expand Beyond Borders With Strategic Global Investments</h2>
+                <p data-en="We help visionary businesses and investors unlock premium international opportunities through intelligent market positioning, luxury branding, and high-impact global expansion strategies tailored for the GCC market." data-ar="نساعد الشركات والمستثمرين ذوي الرؤية على اكتشاف الفرص الدولية المتميزة من خلال التموضع الذكي في الأسواق، والعلامات التجارية الفاخرة، واستراتيجيات التوسع العالمي عالية التأثير المصممة خصيصًا لسوق الخليج.">We help visionary businesses and investors unlock premium international opportunities through intelligent market positioning, luxury branding, and high-impact global expansion strategies tailored for the GCC market.</p>
+                <div class="investment-buttons"><a href="#contact" class="primary-btn" data-en="Explore Opportunities" data-ar="استكشف الفرص">Explore Opportunities<i data-lucide="arrow-right" class="w-4 h-4"></i></a><a href="https://wa.me/971505822373" target="_blank" class="secondary-btn" data-en="Learn More" data-ar="اعرف المزيد">Learn More</a></div>
             </div>
-            <div class="investment-image-wrapper">
-                <img src="expand-horizons.jpg" alt="Global Investment" data-en="Global Investment Opportunities" data-ar="فرص الاستثمار العالمية">
-            </div>
+            <div class="investment-image-wrapper"><img src="expand-horizons.jpg" alt="Global Investment"></div>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
-        <div class="contact-bg">
-            <img src="https://media.istockphoto.com/id/1212879176/photo/3d-abstract-background-with-ultraviolet-neon-lights-empty-frame-cosmic-landscape-glowing.jpg?s=612x612&w=0&k=20&c=nYd8UzSmcUHwb9us4vmM8oTenkFbw8OhvN6-2Ic748U=" alt="Neon Hyperspace Tunnel">
-        </div>
+        <div class="contact-bg"><img src="https://media.istockphoto.com/id/1212879176/photo/3d-abstract-background-with-ultraviolet-neon-lights-empty-frame-cosmic-landscape-glowing.jpg?s=612x612&w=0&k=20&c=nYd8UzSmcUHwb9us4vmM8oTenkFbw8OhvN6-2Ic748U=" alt="Neon Hyperspace Tunnel"></div>
         <div class="contact-overlay"></div>
-
         <div class="contact-content">
-            <h2 class="contact-title">
-                <span data-en="Let's Create" data-ar="لنبتكر">Let's Create</span>
-                <span data-en="Together." data-ar="معاً.">Together.</span>
-            </h2>
-            <p class="contact-text" data-en="Ready to elevate your brand presence across the GCC? Our team is ready to bring your vision to life." data-ar="جاهز لرفع حضور علامتك التجارية عبر الخليج؟ فريقنا مستعد لتحويل رؤيتك إلى واقع.">
-                Ready to elevate your brand presence across the GCC? Our team is ready to bring your vision to life.
-            </p>
-            <div class="contact-license">
-                <i data-lucide="award" class="w-5 h-5"></i>
-                <span data-en="Dubai Economy &amp; Tourism License No. 1623128" data-ar="رخصة دائرة الاقتصاد والسياحة دبي رقم ١٦٢٣١٢٨">
-                    Dubai Economy &amp; Tourism License No. 1623128
-                </span>
-            </div>
-            <div class="contact-details">
-                <div class="contact-item">
-                    <i data-lucide="mail" class="w-5 h-5"></i>
-                    <a href="mailto:info@asemvision.com">info@asemvision.com</a>
-                </div>
-                <div class="contact-item">
-                    <i data-lucide="phone" class="w-5 h-5"></i>
-                    <a href="tel:+971505822373">+971 50 582 2373</a>
-                </div>
-            </div>
-            <a href="https://wa.me/971505822373?text=Hi%2C%20I%20want%20to%20discuss%20a%20marketing%20project"
-               target="_blank"
-               class="btn-gold"
-               data-en="Start a Conversation"
-               data-ar="ابدأ محادثة">
-                Start a Conversation
-            </a>
+            <h2 class="contact-title"><span data-en="Let's Create" data-ar="لنبتكر">Let's Create</span><span data-en="Together." data-ar="معاً.">Together.</span></h2>
+            <p class="contact-text" data-en="Ready to elevate your brand presence across the GCC? Our team is ready to bring your vision to life." data-ar="جاهز لرفع حضور علامتك التجارية عبر الخليج؟ فريقنا مستعد لتحويل رؤيتك إلى واقع.">Ready to elevate your brand presence across the GCC? Our team is ready to bring your vision to life.</p>
+            <div class="contact-license"><i data-lucide="award" class="w-5 h-5"></i><span data-en="Dubai Economy &amp; Tourism License No. 1623128" data-ar="رخصة دائرة الاقتصاد والسياحة دبي رقم ١٦٢٣١٢٨">Dubai Economy &amp; Tourism License No. 1623128</span></div>
+            <div class="contact-details"><div class="contact-item"><i data-lucide="mail" class="w-5 h-5"></i><a href="mailto:info@asemvision.com">info@asemvision.com</a></div><div class="contact-item"><i data-lucide="phone" class="w-5 h-5"></i><a href="tel:+971505822373">+971 50 582 2373</a></div></div>
+            <a href="https://wa.me/971505822373?text=Hi%2C%20I%20want%20to%20discuss%20a%20marketing%20project" target="_blank" class="btn-gold" data-en="Start a Conversation" data-ar="ابدأ محادثة">Start a Conversation</a>
         </div>
     </section>
 
@@ -2057,30 +1985,25 @@
         <div class="container">
             <div class="footer-content">
                 <div><div class="footer-logo">Asem Vision</div><div class="footer-tagline" data-en="Dubai • Integrated Marketing Solutions" data-ar="دبي • حلول تسويق متكاملة">Dubai • Integrated Marketing Solutions</div></div>
-                <div class="footer-links">
-                    <a href="#" class="footer-link" data-en="Privacy" data-ar="الخصوصية">Privacy</a>
-                    <a href="#" class="footer-link" data-en="Terms" data-ar="الشروط">Terms</a>
-                    <a href="#" class="footer-link" data-en="Careers" data-ar="وظائف">Careers</a>
-                </div>
+                <div class="footer-links"><a href="#" class="footer-link" data-en="Privacy" data-ar="الخصوصية">Privacy</a><a href="#" class="footer-link" data-en="Terms" data-ar="الشروط">Terms</a><a href="#" class="footer-link" data-en="Careers" data-ar="وظائف">Careers</a></div>
                 <div class="footer-copyright" data-en="© 2026 ASEM VISION. All Rights Reserved." data-ar="© 2026 عاصم فيجن. جميع الحقوق محفوظة.">© 2026 ASEM VISION. All Rights Reserved.</div>
             </div>
         </div>
     </footer>
 
     <!-- Floating Buttons -->
-    <button class="floating-whatsapp" onclick="window.open('https://wa.me/971505822373?text=Hi%2C%20I%20want%20to%20discuss%20a%20project', '_blank')" aria-label="Chat on WhatsApp">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.485-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" /></svg>
-    </button>
+    <button class="floating-whatsapp" onclick="window.open('https://wa.me/971505822373?text=Hi%2C%20I%20want%20to%20discuss%20a%20project', '_blank')" aria-label="Chat on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.485-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" /></svg></button>
     <button class="floating-email" onclick="window.location.href='mailto:asemvisionco@gmail.com'" aria-label="Send Email"><i data-lucide="mail" class="w-6 h-6"></i></button>
 
     <script>
         lucide.createIcons();
         let currentLang = 'en';
+
+        // ✅ CLIENT LIST UPDATED: [2026] - Removed: Sero Mobility, Dabur Amla, Cadbury | Added: IGLOO, US AID, UNFPA, Save the Children, EUROCAKE
         const clientsData = {
             en: [
                 { name: 'Samsung Mobile', logo: 'logos/samsung.png' },
                 { name: 'London Dairy', logo: 'logos/london-dairy.png' },
-                { name: 'Sero Mobility', logo: 'logos/sero.png' },
                 { name: 'Capo Dairy', logo: 'logos/capo.png' },
                 { name: 'Sayga', logo: 'logos/sayga.png' },
                 { name: 'Livguard', logo: 'logos/livguard.png' },
@@ -2088,14 +2011,17 @@
                 { name: 'Black Dragon', logo: 'logos/black-dragon.png' },
                 { name: 'Gold & Sun', logo: 'logos/gold-sun.png' },
                 { name: 'Tang', logo: 'logos/tang.png' },
-                { name: 'Dabur Amla', logo: 'logos/dabur.png' },
-                { name: 'Cadbury', logo: 'logos/cadbury.png' },
-                { name: 'Unilever', logo: 'logos/unilever.png' }
+                { name: 'Unilever', logo: 'logos/unilever.png' },
+                // NEW CLIENTS:
+                { name: 'IGLOO', logo: 'logos/igloo.png' },
+                { name: 'US AID', logo: 'logos/usaid.png' },
+                { name: 'UNFPA', logo: 'logos/unfpa.png' },
+                { name: 'Save the Children', logo: 'logos/save-the-children.png' },
+                { name: 'EUROCAKE', logo: 'logos/eurocake.png' }
             ],
             ar: [
                 { name: 'سامسونج موبايل', logo: 'logos/samsung.png' },
                 { name: 'لندن ديري', logo: 'logos/london-dairy.png' },
-                { name: 'سيرو للتنقل', logo: 'logos/sero.png' },
                 { name: 'كابو للألبان', logo: 'logos/capo.png' },
                 { name: 'سيقا', logo: 'logos/sayga.png' },
                 { name: 'ليفغارد', logo: 'logos/livguard.png' },
@@ -2103,9 +2029,13 @@
                 { name: 'بلاك دراقون', logo: 'logos/black-dragon.png' },
                 { name: 'قولد إن صن', logo: 'logos/gold-sun.png' },
                 { name: 'تانج', logo: 'logos/tang.png' },
-                { name: 'دابر أملا', logo: 'logos/dabur.png' },
-                { name: 'كادبوري', logo: 'logos/cadbury.png' },
-                { name: 'يونيلفر', logo: 'logos/unilever.png' }
+                { name: 'يونيلفر', logo: 'logos/unilever.png' },
+                // NEW CLIENTS (Arabic):
+                { name: 'آي جلو', logo: 'logos/igloo.png' },
+                { name: 'الوكالة الأمريكية للتنمية الدولية', logo: 'logos/usaid.png' },
+                { name: 'صندوق الأمم المتحدة للسكان', logo: 'logos/unfpa.png' },
+                { name: 'إنقاذ الطفل', logo: 'logos/save-the-children.png' },
+                { name: 'يورو كيك', logo: 'logos/eurocake.png' }
             ]
         };
 
@@ -2153,11 +2083,11 @@
                     ? `<img src="${client.logo}" alt="${client.name}" class="client-logo" loading="lazy" decoding="async" width="180" height="70" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'client-logo-placeholder\\'>${client.name.charAt(0)}</div>'">`
                     : `<div class="client-logo-placeholder">${client.name.charAt(0)}</div>`;
                 card.innerHTML = `
-                        <div class="client-logo-wrapper">
-                            ${logoHTML}
-                        </div>
-                        <span class="client-name">${client.name}</span>
-                    `;
+                            <div class="client-logo-wrapper">
+                                ${logoHTML}
+                            </div>
+                            <span class="client-name">${client.name}</span>
+                        `;
                 fragment.appendChild(card);
             });
             grid.appendChild(fragment);
