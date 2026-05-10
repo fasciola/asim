@@ -15,6 +15,27 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
+        /* ==================== FULL SCREEN VIDEO - NO OVERLAY (Video on top) ==================== */
+        .top-intro-video {
+            position: relative;
+            width: 100%;
+            height: 100dvh; /* Best for mobile */
+            min-height: 100vh;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+            .top-intro-video video {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center; /* Reduces side cropping on mobile */
+                z-index: -1;
+            }
+
         :root {
             --bg-primary: #071B34;
             --bg-secondary: #071B34;
@@ -458,7 +479,7 @@
 
         .hero-title {
             font-size: clamp(2.5rem, 8vw, 6rem);
-            line-height: 1.3; /* increased to separate lines */
+            line-height: 1.3;
             letter-spacing: -0.02em;
             text-transform: uppercase;
             margin-bottom: 2rem;
@@ -564,7 +585,7 @@
             color: var(--cyan-accent);
             display: block;
             margin-bottom: 1.5rem;
-            font-weight: 700; /* bold taglines */
+            font-weight: 700;
         }
 
         body.rtl .section-tagline {
@@ -808,7 +829,7 @@
             font-weight: 300;
             line-height: 1.6;
         }
-        /* pure white */
+
         .expertise-visual {
             aspect-ratio: 1;
             border-radius: 1.5rem;
@@ -1132,7 +1153,7 @@
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
-                opacity: 1; /* fully visible background */
+                opacity: 1;
             }
 
         .contact-overlay {
@@ -1465,9 +1486,16 @@
         <button class="btn-outline-sm" onclick="toggleLanguage(); toggleMobileMenu();" id="mobileLangToggle">🇸 التبديل للإنجليزية</button>
     </div>
 
+    <!-- FULL SCREEN INTRO VIDEO -->
+    <section class="top-intro-video">
+        <video id="introVideo" autoplay muted playsinline loop poster="first-poster.jpg" preload="auto">
+            <source src="first.mp4" type="video/mp4">
+        </video>
+    </section>
+
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="video-bg"><video autoplay loop muted playsinline preload="auto" poster="1778137111.png"><source src="hero-video-file.mp4" type="video/mp4" /><source src="gold-background.webm" type="video/webm" /></video></div>
+        <div class="video-bg"><video autoplay loop muted playsinline preload="auto"><source src="hero-video-file.mp4" type="video/mp4" /><source src="gold-background.webm" type="video/webm" /></video></div>
         <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content">
@@ -1599,8 +1627,7 @@
     <button class="floating-whatsapp" onclick="window.open('https://wa.me/971505822373?text=Hi%2C%20I%20want%20to%20discuss%20a%20project', '_blank')" aria-label="Chat on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.485-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" /></svg></button>
     <button class="floating-email" onclick="window.location.href='mailto:asemvisionco@gmail.com'" aria-label="Send Email"><i data-lucide="mail" class="w-6 h-6"></i></button>
 
-    <script>
-        lucide.createIcons();
+    <script>lucide.createIcons();
         let currentLang = 'en';
 
         const clientsData = {
@@ -1766,6 +1793,36 @@
             requestAnimationFrame(drawParticles);
         }
         drawParticles();
-    </script>
+
+        // Enhanced mobile autoplay for intro video
+        (function () {
+            const introVideo = document.getElementById('introVideo');
+            if (!introVideo) return;
+
+            // Try to play immediately
+            const attemptPlay = () => {
+                introVideo.play().catch(() => {
+                    // If blocked, wait for first user interaction anywhere on the page
+                    const playOnInteraction = () => {
+                        introVideo.play();
+                        document.removeEventListener('touchstart', playOnInteraction);
+                        document.removeEventListener('click', playOnInteraction);
+                    };
+                    document.addEventListener('touchstart', playOnInteraction, { once: true });
+                    document.addEventListener('click', playOnInteraction, { once: true });
+                });
+            };
+
+            // If video is already loaded / ready
+            if (introVideo.readyState >= 2) {
+                attemptPlay();
+            } else {
+                introVideo.addEventListener('loadedmetadata', attemptPlay, { once: true });
+                // Fallback after a timeout in case metadata never fires
+                setTimeout(() => {
+                    if (introVideo.paused) attemptPlay();
+                }, 1500);
+            }
+        })();</script>
 </body>
 </html>
