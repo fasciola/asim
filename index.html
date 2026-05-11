@@ -1487,6 +1487,7 @@
     </div>
 
     <!-- FULL SCREEN INTRO VIDEO -->
+    <!-- FULL SCREEN INTRO VIDEO -->
     <section class="top-intro-video" id="home">
         <video id="introVideo" autoplay muted playsinline loop poster="first-poster.jpg" preload="auto">
             <source src="first.mp4" type="video/mp4">
@@ -1744,13 +1745,29 @@
         document.querySelectorAll('.reveal, .expertise-list, .campaign-list, .reach-flags').forEach(el => observer.observe(el));
         renderClients();
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
+        // Smooth scroll with special handling for Home (always goes to top)
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const href = this.getAttribute('href');
+
+        if (href === '#home') {
+            // Always scroll to the very top (intro video)
+            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        } else {
+            const target = document.querySelector(href);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Close mobile menu after clicking any link
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileMenu && mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+        }
+    });
+});
 
         // Particle animation
         const canvas = document.getElementById('particlesCanvas');
