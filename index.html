@@ -1289,6 +1289,42 @@
                 color: var(--cyan-accent);
             }
 
+        .footer-meta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .footer-credit {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-tertiary);
+            text-decoration: none;
+            font-size: 0.62rem;
+            letter-spacing: 0.12em;
+            opacity: 0.75;
+            transition: color 0.3s ease, opacity 0.3s ease;
+        }
+
+            .footer-credit:hover {
+                color: var(--cyan-accent);
+                opacity: 1;
+            }
+
+            .footer-credit img {
+                height: 20px;
+                width: auto;
+                display: block;
+            }
+
+        @media (min-width: 768px) {
+            .footer-meta {
+                align-items: flex-end;
+            }
+        }
+
         .footer-copyright {
             font-size: 0.65rem;
             letter-spacing: 0.3em;
@@ -1619,7 +1655,13 @@
             <div class="footer-content">
                 <div><div class="footer-logo">Asem Vision</div><div class="footer-tagline" data-en="Dubai • Integrated Marketing Solutions" data-ar="دبي • حلول تسويق متكاملة">Dubai • Integrated Marketing Solutions</div></div>
                 <div class="footer-links"><a href="#" class="footer-link" data-en="Privacy" data-ar="الخصوصية">Privacy</a><a href="#" class="footer-link" data-en="Terms" data-ar="الشروط">Terms</a><a href="#" class="footer-link" data-en="Careers" data-ar="وظائف">Careers</a></div>
-                <div class="footer-copyright" data-en="© 2026 ASEM VISION. All Rights Reserved." data-ar="© 2026 عاصم فيجن. جميع الحقوق محفوظة.">© 2026 ASEM VISION. All Rights Reserved.</div>
+                <div class="footer-meta">
+                    <div class="footer-copyright" data-en="© 2026 ASEM VISION. All Rights Reserved." data-ar="© 2026 عاصم فيجن. جميع الحقوق محفوظة.">© 2026 ASEM VISION. All Rights Reserved.</div>
+                    <a class="footer-credit" href="https://4pillarsweb.online/" target="_blank" rel="noopener noreferrer" aria-label="Website by Four Pillars Web Design">
+                        <span>Website by Four Pillars</span>
+                        <img src="https://4pillarsweb.online/logo.png" alt="Four Pillars Web Design" loading="lazy">
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
