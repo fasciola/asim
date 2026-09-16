@@ -1,0 +1,98 @@
+name: Add Four Pillars footer credit
+
+on:
+  push:
+    paths:
+      - '.github/workflows/add-four-pillars-credit.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch-footer:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Add Four Pillars credit
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('index.html')
+          html = path.read_text(encoding='utf-8')
+
+          css_marker = """        .footer-copyright {
+"""
+          credit_css = """        .footer-meta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .footer-credit {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-tertiary);
+            text-decoration: none;
+            font-size: 0.62rem;
+            letter-spacing: 0.12em;
+            opacity: 0.75;
+            transition: color 0.3s ease, opacity 0.3s ease;
+        }
+
+            .footer-credit:hover {
+                color: var(--cyan-accent);
+                opacity: 1;
+            }
+
+            .footer-credit img {
+                height: 20px;
+                width: auto;
+                display: block;
+            }
+
+        @media (min-width: 768px) {
+            .footer-meta {
+                align-items: flex-end;
+            }
+        }
+
+"""
+
+          if '.footer-credit {' not in html:
+              if css_marker not in html:
+                  raise SystemExit('Footer copyright CSS marker not found')
+              html = html.replace(css_marker, credit_css + css_marker, 1)
+
+          old_footer = '''                <div class="footer-copyright" data-en="© 2026 ASEM VISION. All Rights Reserved." data-ar="© 2026 عاصم فيجن. جميع الحقوق محفوظة.">© 2026 ASEM VISION. All Rights Reserved.</div>'''
+          new_footer = '''                <div class="footer-meta">
+                    <div class="footer-copyright" data-en="© 2026 ASEM VISION. All Rights Reserved." data-ar="© 2026 عاصم فيجن. جميع الحقوق محفوظة.">© 2026 ASEM VISION. All Rights Reserved.</div>
+                    <a class="footer-credit" href="https://4pillarsweb.online/" target="_blank" rel="noopener noreferrer" aria-label="Website by Four Pillars Web Design">
+                        <span>Website by Four Pillars</span>
+                        <img src="https://4pillarsweb.online/logo.png" alt="Four Pillars Web Design" loading="lazy">
+                    </a>
+                </div>'''
+
+          if 'Website by Four Pillars' not in html:
+              if old_footer not in html:
+                  raise SystemExit('Footer copyright HTML marker not found')
+              html = html.replace(old_footer, new_footer, 1)
+
+          path.write_text(html, encoding='utf-8')
+          PY
+
+      - name: Commit footer credit and remove one-time workflow
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm .github/workflows/add-four-pillars-credit.yml
+          git add index.html .github/workflows/add-four-pillars-credit.yml
+          git commit -m "Add Four Pillars website credit to footer"
+          git push
